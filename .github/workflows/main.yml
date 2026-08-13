@@ -1,0 +1,19 @@
+name: Draw Yu-Gi-Oh! Card
+on:
+  issue_comment:
+    types: [created, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Draw Yu-Gi-Oh! Card on GitHub issue
+        uses: Doarakko/draw-action@00cf6214edf61fb2c04e5e7558e1ded9c854da7d # main
+        if: >-
+          contains(github.event.comment.body, 'draw')
+          || contains(github.event.comment.body, 'ドロー')
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
