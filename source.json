@@ -1,6 +1,16 @@
 {
   "owner": "Doarakko",
   "repo": "draw-action",
-  "version": "",
-  "url": "https://github.com/Doarakko/draw-action"
+  "version": "v1.2",
+  "commit_sha": "7bb4df558139ca61c895b250433fe76c6c954491",
+  "url": "https://github.com/Doarakko/draw-action",
+  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
+  "test_agent_version": "2",
+  "harden_agent_version": "2",
+  "node_artifact": {
+    "gcs_uri": "gs://prod-actions-node-artifacts/node-artifacts/Doarakko/draw-action/v1.2/sha256-0b6a6b4babfe05303a02f9f3f5df847d519651141024c4f626dcd83e9098a784.tar.gz",
+    "sha256": "0b6a6b4babfe05303a02f9f3f5df847d519651141024c4f626dcd83e9098a784",
+    "size_bytes": 949944
+  }
 }

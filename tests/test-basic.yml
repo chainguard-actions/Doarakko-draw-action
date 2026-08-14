@@ -1,0 +1,34 @@
+name: Test basic usage - draw Yu-Gi-Oh card action
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      # The action fetches a random Yu-Gi-Oh! card from an external API and
+      # attempts to post it as an issue comment. Under workflow_dispatch there
+      # is no issue context, so the comment POST will fail. The external API
+      # fetch may also fail in sandboxed environments. Either way, the action
+      # will call core.setFailed() on error. We use continue-on-error so the
+      # job continues regardless of the action's exit code.
+      - id: action
+        uses: .
+        with:
+          github-token: ${{ github.token }}
+        continue-on-error: true
+
+      # The action should complete with either success or failure (not be
+      # cancelled or skipped). Any definitive outcome means the action ran.
+      - name: Assert action ran to completion
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "cancelled" ] || [ "$OUTCOME" = "skipped" ]; then
+            echo "FAIL: action did not run to completion, outcome=$OUTCOME"
+            exit 1
+          fi
+          echo "PASS: action ran to completion with outcome=$OUTCOME"

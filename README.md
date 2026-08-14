@@ -1,14 +1,41 @@
-# Doarakko/draw-action
+# draw-action
 
 Draw Yu-Gi-Oh! Card on GitHub issue.
 
-Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at [https://github.com/Doarakko/draw-action](https://github.com/Doarakko/draw-action).
+![example](./example.gif)
 
-## Versions
+It takes about 10 seconds to draw.
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v1.3 | [`v1.3`](https://github.com/chainguard-actions/Doarakko-draw-action/tree/v1.3) | [`a317d69`](https://github.com/Doarakko/draw-action/commit/a317d690890062ec5828c094389f363447c58251) |
+## Inputs
+
+### `github-token`
+
+**Required** The GitHub token used to create an authenticated client.
+
+## Example usage
+
+```yaml
+name: Draw Yu-Gi-Oh! Card
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Draw Yu-Gi-Oh! Card on GitHub issue
+        uses: Doarakko/draw-action@main
+        if: >-
+          contains(github.event.comment.body, 'draw')
+          || contains(github.event.comment.body, 'ドロー')
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+```
+
+## Demo
+
+Please comment "draw" to [this issue](https://github.com/Doarakko/draw-action/issues/1)!
 
 ## Privacy
 
